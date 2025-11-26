@@ -7,9 +7,8 @@
   <style>
     :root {
       --midnight: #020921;
-      --midnight-soft: #041330;
       --accent-orange: #f58a1f;
-      --accent-blue: #1b4c8f;
+      --brand-blue: #245bb4;
       --text-light: #f5f7ff;
       --text-muted: #b6c2e3;
     }
@@ -41,7 +40,6 @@
       z-index: 0;
     }
 
-    /* Simple star field using box-shadow dots */
     .stars::before,
     .stars::after {
       content: "";
@@ -82,49 +80,43 @@
       text-align: center;
     }
 
-    /* LOGO WRAPPER – Startup, Arc, Pulse unchanged */
-.logo-wrap {
-  position: relative;
-  display: inline-block;
-  margin: 0 auto 22px;
-  padding: 14px;
-  border-radius: 18px;
-  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 80%);
-  animation:
-    logoStartup 3s ease-out forwards,
-    logoPulse 1.8s ease-in-out 3.3s infinite;
-}
+    /* LOGO WRAP – startup, arc sweep, synced pulse */
+    .logo-wrap {
+      position: relative;
+      display: inline-block;
+      margin: 0 auto 22px;
+      padding: 14px;
+      border-radius: 20px;
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 80%);
+      animation:
+        logoStartup 3s ease-out forwards,
+        logoPulse 1.8s ease-in-out 3.3s infinite;
+    }
 
-/* LOGO IMAGE – New Size, Bevel, Emboss, Stroke */
-.site-logo {
-  width: 560px;
-  max-width: 90%;
-  height: auto;
-  display: block;
+    /* Power arc sweep */
+    .logo-wrap::after {
+      content: "";
+      position: absolute;
+      top: -10%;
+      left: -40%;
+      width: 40%;
+      height: 120%;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,0.9) 50%,
+        transparent 100%
+      );
+      opacity: 0;
+      transform: translateX(-60%) skewX(-20deg);
+      pointer-events: none;
+      animation: logoArcSweep 1.6s ease-out 1.8s 1 forwards;
+    }
 
-  /* WHITE STROKE (4px) */
-  outline: 4px solid rgba(255,255,255,1);
-  outline-offset: -4px;
-  border-radius: 8px;
-
-  /* BEVEL + EMBOSS EFFECT */
-  box-shadow:
-    /* inner highlights */
-    inset 2px 2px 4px rgba(255,255,255,0.55),
-    inset -2px -2px 6px rgba(0,0,0,0.45),
-
-    /* outer contour */
-    0 0 8px rgba(255,255,255,0.7),
-    0 6px 12px rgba(0,0,0,0.55);
-
-  /* glow from the startup/pulse animations */
-  filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
-}
-
-
+    /* SVG logo itself */
     .site-logo {
-      max-width: 650px;
-      width: 70%;
+      width: 560px;
+      max-width: 90%;
       height: auto;
       display: block;
     }
@@ -140,7 +132,7 @@
     .scene {
       position: relative;
       margin: 0 auto 30px;
-      width: 650px;
+      width: 640px;
       max-width: 100%;
       aspect-ratio: 16 / 9;
       background: radial-gradient(circle at top, rgba(52,92,160,0.5), transparent 60%);
@@ -193,7 +185,6 @@
       background: linear-gradient(90deg, #222, #555);
     }
 
-    /* Lid */
     .gen-lid {
       position: absolute;
       top: -18px;
@@ -206,7 +197,6 @@
       animation: lidOpen 2.2s ease-in-out 2.3s forwards;
     }
 
-    /* Front panel */
     .gen-front-panel {
       position: absolute;
       bottom: 0;
@@ -245,7 +235,6 @@
       );
     }
 
-    /* Exposed interior */
     .gen-interior {
       position: absolute;
       inset-inline: 16px;
@@ -342,7 +331,7 @@
       inset-inline: 2px;
       height: 16px;
       border-radius: 50% 50% 40% 40%;
-      background: linear-gradient(135deg, #d3a15f, #f3c57a); /* dirty blonde */
+      background: linear-gradient(135deg, #d3a15f, #f3c57a);
     }
 
     .tech-body {
@@ -358,330 +347,3 @@
 
     .tech-arm {
       position: absolute;
-      top: 40px;
-      right: -6px;
-      width: 30px;
-      height: 10px;
-      border-radius: 6px;
-      background: linear-gradient(135deg, #1f4f9d, #143264);
-      transform-origin: left center;
-      animation: techArmWork 0.5s ease-in-out 3.6s infinite alternate;
-    }
-
-    .tech-leg-left,
-    .tech-leg-right {
-      position: absolute;
-      bottom: 0;
-      width: 14px;
-      height: 46px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #111827, #020617);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.8);
-    }
-
-    .tech-leg-left {
-      left: 12px;
-    }
-
-    .tech-leg-right {
-      right: 12px;
-      transform-origin: top center;
-      animation: techKneeBend 1.8s ease-in-out 3.3s infinite alternate;
-    }
-
-    .tech-leg-left::after,
-    .tech-leg-right::after {
-      content: "";
-      position: absolute;
-      bottom: -6px;
-      left: -2px;
-      width: 20px;
-      height: 8px;
-      border-radius: 6px;
-      background: #0b1220;
-    }
-
-    /* LOGO ANIMATIONS */
-
-    /* Startup flicker & glow-up */
-    @keyframes logoStartup {
-      0% {
-        opacity: 0;
-        filter: drop-shadow(0 0 0 rgba(255,255,255,0));
-      }
-      20% {
-        opacity: 1;
-        filter: drop-shadow(0 0 2px rgba(255,255,255,0.4));
-      }
-      35% {
-        opacity: 0.65;
-        filter: drop-shadow(0 0 1px rgba(255,255,255,0.2));
-      }
-      50% {
-        opacity: 1;
-        filter: drop-shadow(0 0 6px rgba(255,255,255,0.9));
-      }
-      70% {
-        opacity: 0.85;
-        filter: drop-shadow(0 0 3px rgba(255,255,255,0.5));
-      }
-      100% {
-        opacity: 1;
-        filter: drop-shadow(0 0 8px rgba(255,255,255,0.95));
-      }
-    }
-
-    /* Power arc sweep across logo */
-    @keyframes logoArcSweep {
-      0% {
-        opacity: 0;
-        transform: translateX(-60%) skewX(-20deg);
-      }
-      20% {
-        opacity: 0.75;
-      }
-      60% {
-        opacity: 0.4;
-      }
-      100% {
-        opacity: 0;
-        transform: translateX(160%) skewX(-20deg);
-      }
-    }
-
-    /* Generator-hum pulse, synced at 1.8s like tech hunch/knee */
-    @keyframes logoPulse {
-      0% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
-      }
-      50% {
-        transform: scale(1.015);
-        filter: drop-shadow(0 0 14px rgba(255,255,255,1));
-      }
-      100% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
-      }
-    }
-
-    /* OTHER ANIMATIONS */
-
-    @keyframes generatorSlideIn {
-      0% {
-        transform: translateX(-50%) translateY(120%);
-        opacity: 0;
-      }
-      60% {
-        transform: translateX(-50%) translateY(0%);
-        opacity: 1;
-      }
-      100% {
-        transform: translateX(-50%) translateY(0%);
-        opacity: 1;
-      }
-    }
-
-    @keyframes lidOpen {
-      0% {
-        transform: rotateX(0deg);
-      }
-      35% {
-        transform: rotateX(0deg);
-      }
-      70% {
-        transform: rotateX(-62deg);
-      }
-      100% {
-        transform: rotateX(-62deg);
-      }
-    }
-
-    @keyframes frontPanelMove {
-      0% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-      45% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-      70% {
-        transform: translate(70px, 10px) rotate(6deg);
-      }
-      100% {
-        transform: translate(70px, 10px) rotate(6deg);
-      }
-    }
-
-    @keyframes techWalkIn {
-      0% {
-        transform: translateX(-130%);
-      }
-      70% {
-        transform: translateX(45%);
-      }
-      100% {
-        transform: translateX(45%);
-      }
-    }
-
-    @keyframes techWorkPose {
-      0% {
-        transform: translateX(0) translateY(0);
-      }
-      60% {
-        transform: translateX(0) translateY(0);
-      }
-      100% {
-        transform: translateX(10px) translateY(-8px);
-      }
-    }
-
-    @keyframes techHunch {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(10deg);
-      }
-    }
-
-    @keyframes techArmWork {
-      0% {
-        transform: rotate(-8deg);
-      }
-      100% {
-        transform: rotate(20deg);
-      }
-    }
-
-    @keyframes techKneeBend {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(-12deg);
-      }
-    }
-
-    /* Text content */
-    .message-main {
-      font-size: 1.35rem;
-      margin-bottom: 8px;
-    }
-
-    .message-sub {
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      max-width: 560px;
-      margin: 0 auto 18px;
-    }
-
-    .cta {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-top: 10px;
-    }
-
-    .cta strong {
-      color: var(--accent-orange);
-    }
-
-    .contact-line {
-      margin-top: 6px;
-      font-size: 0.92rem;
-    }
-
-    .contact-line a {
-      color: var(--accent-orange);
-      text-decoration: none;
-    }
-
-    .contact-line a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 640px) {
-      .site-logo {
-        max-width: 280px;
-        width: 80%;
-      }
-      .subtitle {
-        font-size: 0.8rem;
-      }
-      .scene {
-        border-radius: 18px;
-      }
-      .message-main {
-        font-size: 1.1rem;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="stars"></div>
-
-  <div class="wrapper">
-    <!-- LOGO WITH STARTUP + ARC + PULSE -->
-    <div class="logo-wrap">
-      <img
-        src="logo-generatorsolutions.png"
-        alt="Generator Solutions Logo"
-        class="site-logo"
-      />
-    </div>
-
-    <div class="subtitle">
-      Scheduled Maintenance · Powering Confidence. Delivering Excellence.
-    </div>
-
-    <div class="scene" aria-hidden="true">
-      <div class="ground"></div>
-
-      <!-- Generator -->
-      <div class="generator">
-        <div class="gen-body">
-          <div class="gen-logo"></div>
-          <div class="gen-lid"></div>
-          <div class="gen-front-panel">
-            <div class="gen-vents"></div>
-          </div>
-          <div class="gen-interior"></div>
-        </div>
-      </div>
-
-      <!-- Technician + toolbox -->
-      <div class="tech-group">
-        <div class="toolbox"></div>
-        <div class="tech">
-          <div class="tech-head">
-            <div class="tech-hair"></div>
-          </div>
-          <div class="tech-body"></div>
-          <div class="tech-arm"></div>
-          <div class="tech-leg-left"></div>
-          <div class="tech-leg-right"></div>
-        </div>
-      </div>
-    </div>
-
-    <p class="message-main">
-      Our website is currently <strong>undergoing a full tune-up.</strong>
-    </p>
-    <p class="message-sub">
-      Just like your generator, we’re performing scheduled maintenance to ensure
-      everything runs smoothly, efficiently, and reliably when you need it most.
-    </p>
-
-    <p class="cta">
-      Need assistance while we’re “under the hood”? <strong>We’re still here for you.</strong>
-    </p>
-    <p class="contact-line">
-      📞 (705) 286-1003 · 📧 <a href="mailto:kam@generatorsolutions.ca">kam@generatorsolutions.ca</a><br />
-      🌐 <a href="https://www.generatorsolutions.ca" target="_blank">www.generatorsolutions.ca</a>
-    </p>
-  </div>
-</body>
-</html>
-
-
-
