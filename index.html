@@ -70,7 +70,7 @@
     }
 
     @keyframes twinkle {
-      0% { opacity: 0.5; }
+      0% { opacity: 0.2; }
       100% { opacity: 0.9; }
     }
 
@@ -82,25 +82,50 @@
       text-align: center;
     }
 
-    /* LOGO */
-  .site-logo {
-  max-width: 480px;      /* Tweak for size */
-  width: 70%;
-  height: auto;
-  margin: 0 auto 22px;
-  display: block;
+    /* LOGO WRAPPER WITH STARTUP, ARC SWEEP, AND PULSE */
+    .logo-wrap {
+      position: relative;
+      display: inline-block;
+      margin: 0 auto 22px;
+      padding: 10px;
+      border-radius: 12px;
+      background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 72%);
+      filter: drop-shadow(0 0 0 rgba(255,255,255,0));
 
-  /* Soft white glow */
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.95))
-          drop-shadow(0 0 12px rgba(255, 255, 255, 0.45));
-          
-  /* Optional light backing halo (keeps subtle) */
-  background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 80%);
+      /* 1) startup flicker, 2) then synced pulse with tech (1.8s like tech hunch) */
+      animation:
+        logoStartup 3s ease-out forwards,
+        logoPulse 1.8s ease-in-out 3.3s infinite;
+    }
 
-  border-radius: 12px;
-  padding: 10px;
-}
+    /* Power arc sweep over the logo */
+    .logo-wrap::after {
+      content: "";
+      position: absolute;
+      top: -10%;
+      left: -40%;
+      width: 40%;
+      height: 120%;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,0.85) 50%,
+        transparent 100%
+      );
+      opacity: 0;
+      transform: translateX(-60%) skewX(-20deg);
+      pointer-events: none;
 
+      /* single sweep after startup begins */
+      animation: logoArcSweep 1.6s ease-out 1.8s 1 forwards;
+    }
+
+    .site-logo {
+      max-width: 340px;
+      width: 70%;
+      height: auto;
+      display: block;
+    }
 
     .subtitle {
       font-size: 0.95rem;
@@ -141,7 +166,7 @@
       width: 260px;
       max-width: 46%;
       transform: translateX(-50%) translateY(120%);
-      animation: generatorSlideIn 2.5s ease-out 0.5s forwards;
+      animation: generatorSlideIn 1.8s ease-out 0.5s forwards;
     }
 
     .gen-body {
@@ -190,7 +215,7 @@
       background: linear-gradient(180deg, #e1e5f3, #c8cee3);
       box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08);
       transform-origin: center bottom;
-      animation: frontPanelMove 2.9s ease-in-out 3.2s forwards;
+      animation: frontPanelMove 2.4s ease-in-out 2.7s forwards;
     }
 
     .gen-vents {
@@ -253,7 +278,7 @@
       height: 140px;
       width: 260px;
       transform: translateX(-130%);
-      animation: techWalkIn 3.5s ease-out 1s forwards;
+      animation: techWalkIn 2.4s ease-out 1s forwards;
     }
 
     .toolbox {
@@ -297,7 +322,7 @@
       flex-direction: column;
       align-items: center;
       transform-origin: bottom center;
-      animation: techWorkPose 4.5s ease-in-out 3.1s forwards;
+      animation: techWorkPose 2.4s ease-in-out 3.1s forwards;
     }
 
     .tech-head {
@@ -374,7 +399,71 @@
       background: #0b1220;
     }
 
-    /* Animations */
+    /* LOGO ANIMATIONS */
+
+    /* Startup flicker & glow-up */
+    @keyframes logoStartup {
+      0% {
+        opacity: 0;
+        filter: drop-shadow(0 0 0 rgba(255,255,255,0));
+      }
+      20% {
+        opacity: 1;
+        filter: drop-shadow(0 0 2px rgba(255,255,255,0.4));
+      }
+      35% {
+        opacity: 0.65;
+        filter: drop-shadow(0 0 1px rgba(255,255,255,0.2));
+      }
+      50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 6px rgba(255,255,255,0.9));
+      }
+      70% {
+        opacity: 0.85;
+        filter: drop-shadow(0 0 3px rgba(255,255,255,0.5));
+      }
+      100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 8px rgba(255,255,255,0.95));
+      }
+    }
+
+    /* Power arc sweep across logo */
+    @keyframes logoArcSweep {
+      0% {
+        opacity: 0;
+        transform: translateX(-60%) skewX(-20deg);
+      }
+      20% {
+        opacity: 0.75;
+      }
+      60% {
+        opacity: 0.4;
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(160%) skewX(-20deg);
+      }
+    }
+
+    /* Generator-hum pulse, synced at 1.8s like tech hunch/knee */
+    @keyframes logoPulse {
+      0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
+      }
+      50% {
+        transform: scale(1.015);
+        filter: drop-shadow(0 0 14px rgba(255,255,255,1));
+      }
+      100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
+      }
+    }
+
+    /* OTHER ANIMATIONS */
 
     @keyframes generatorSlideIn {
       0% {
@@ -396,7 +485,7 @@
         transform: rotateX(0deg);
       }
       35% {
-      transform: rotateX(0deg);
+        transform: rotateX(0deg);
       }
       70% {
         transform: rotateX(-62deg);
@@ -455,139 +544,3 @@
     }
 
     @keyframes techArmWork {
-      0% {
-        transform: rotate(-8deg);
-      }
-      100% {
-        transform: rotate(20deg);
-      }
-    }
-
-    @keyframes techKneeBend {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(-12deg);
-      }
-    }
-
-    /* Text content */
-    .message-main {
-      font-size: 1.35rem;
-      margin-bottom: 8px;
-    }
-
-    .message-sub {
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      max-width: 560px;
-      margin: 0 auto 18px;
-    }
-
-    .cta {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-top: 10px;
-    }
-
-    .cta strong {
-      color: var(--accent-orange);
-    }
-
-    .contact-line {
-      margin-top: 6px;
-      font-size: 0.92rem;
-    }
-
-    .contact-line a {
-      color: var(--accent-orange);
-      text-decoration: none;
-    }
-
-    .contact-line a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 640px) {
-      .site-logo {
-        max-width: 280px;
-        width: 80%;
-      }
-      .subtitle {
-        font-size: 0.8rem;
-      }
-      .scene {
-        border-radius: 18px;
-      }
-      .message-main {
-        font-size: 1.1rem;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="stars"></div>
-
-  <div class="wrapper">
-    <!-- LOGO -->
-    <img
-      src="logo-generatorsolutions.png"
-      alt="Generator Solutions Logo"
-      class="site-logo"
-    />
-
-    <div class="subtitle">
-      Scheduled Maintenance · Powering Confidence. Delivering Excellence.
-    </div>
-
-    <div class="scene" aria-hidden="true">
-      <div class="ground"></div>
-
-      <!-- Generator -->
-      <div class="generator">
-        <div class="gen-body">
-          <div class="gen-logo"></div>
-          <div class="gen-lid"></div>
-          <div class="gen-front-panel">
-            <div class="gen-vents"></div>
-          </div>
-          <div class="gen-interior"></div>
-        </div>
-      </div>
-
-      <!-- Technician + toolbox -->
-      <div class="tech-group">
-        <div class="toolbox"></div>
-        <div class="tech">
-          <div class="tech-head">
-            <div class="tech-hair"></div>
-          </div>
-          <div class="tech-body"></div>
-          <div class="tech-arm"></div>
-          <div class="tech-leg-left"></div>
-          <div class="tech-leg-right"></div>
-        </div>
-      </div>
-    </div>
-
-    <p class="message-main">
-      Our website is currently <strong>undergoing a full tune-up.</strong>
-    </p>
-    <p class="message-sub">
-      Just like your generator, we’re performing scheduled maintenance to ensure
-      everything runs smoothly, efficiently, and reliably when you need it most.
-    </p>
-
-    <p class="cta">
-      Need assistance while we’re “under the hood”? <strong>We’re still here for you.</strong>
-    </p>
-    <p class="contact-line">
-      📞 (705) 286-1003 · 📧 <a href="mailto:kam@generatorsolutions.ca">kam@generatorsolutions.ca</a><br />
-      🌐 <a href="https://www.generatorsolutions.ca" target="_blank">www.generatorsolutions.ca</a>
-    </p>
-  </div>
-</body>
-</html>
-
-
