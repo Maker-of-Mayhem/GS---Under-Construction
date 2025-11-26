@@ -5,15 +5,6 @@
   <title>Generator Solutions – Under Construction</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    .site-logo {
-  max-width: 340px;          /* adjusts overall size */
-  width: 70%;                /* responsive scaling */
-  height: auto;
-  margin: 0 auto 22px;
-  display: block;
-  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.65));
-}
-
     :root {
       --midnight: #020921;
       --midnight-soft: #041330;
@@ -91,18 +82,17 @@
       text-align: center;
     }
 
-    .brand {
-      font-size: 2.4rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 14px;
-      color: #ffffff;
-      text-shadow: 0 0 16px rgba(0,0,0,0.7);
-    }
-
-    .brand span {
-      color: var(--accent-orange);
+    /* LOGO */
+    .site-logo {
+      max-width: 340px;       /* tweak for size */
+      width: 70%;
+      height: auto;
+      margin: 0 auto 22px;
+      display: block;
+      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.65));
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      border-radius: 12px;
+      padding: 10px;
     }
 
     .subtitle {
@@ -221,7 +211,7 @@
       );
     }
 
-    /* Exposed interior (suggestion of guts once panel “removed”) */
+    /* Exposed interior */
     .gen-interior {
       position: absolute;
       inset-inline: 16px;
@@ -399,7 +389,7 @@
         transform: rotateX(0deg);
       }
       35% {
-        transform: rotateX(0deg);
+      transform: rotateX(0deg);
       }
       70% {
         transform: rotateX(-62deg);
@@ -513,8 +503,9 @@
     }
 
     @media (max-width: 640px) {
-      .brand {
-        font-size: 1.8rem;
+      .site-logo {
+        max-width: 280px;
+        width: 80%;
       }
       .subtitle {
         font-size: 0.8rem;
@@ -532,16 +523,16 @@
   <div class="stars"></div>
 
   <div class="wrapper">
-   <img 
-  src="logo-generatorsolutions.png" 
-  alt="Generator Solutions Logo" 
-  class="site-logo"
-/>
+    <!-- LOGO -->
+    <img
+      src="logo-generatorsolutions.png"
+      alt="Generator Solutions Logo"
+      class="site-logo"
+    />
 
-<div class="subtitle">
-  Scheduled Maintenance · Powering Confidence. Delivering Excellence.
-</div>
-
+    <div class="subtitle">
+      Scheduled Maintenance · Powering Confidence. Delivering Excellence.
+    </div>
 
     <div class="scene" aria-hidden="true">
       <div class="ground"></div>
@@ -591,4 +582,3 @@
   </div>
 </body>
 </html>
-
