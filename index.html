@@ -83,17 +83,24 @@
     }
 
     /* LOGO */
-    .site-logo {
-      max-width: 340px;       /* tweak for size */
-      width: 70%;
-      height: auto;
-      margin: 0 auto 22px;
-      display: block;
-      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.65));
-      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-      border-radius: 12px;
-      padding: 10px;
-    }
+  .site-logo {
+  max-width: 340px;      /* Tweak for size */
+  width: 70%;
+  height: auto;
+  margin: 0 auto 22px;
+  display: block;
+
+  /* Soft white glow */
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.95))
+          drop-shadow(0 0 12px rgba(255, 255, 255, 0.45));
+          
+  /* Optional light backing halo (keeps subtle) */
+  background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 72%);
+
+  border-radius: 12px;
+  padding: 10px;
+}
+
 
     .subtitle {
       font-size: 0.95rem;
@@ -582,3 +589,4 @@
   </div>
 </body>
 </html>
+
