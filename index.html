@@ -82,43 +82,45 @@
       text-align: center;
     }
 
-    /* LOGO WRAPPER WITH STARTUP, ARC SWEEP, AND PULSE */
-    .logo-wrap {
-      position: relative;
-      display: inline-block;
-      margin: 0 auto 22px;
-      padding: 10px;
-      border-radius: 12px;
-      background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 85%);
-      filter: drop-shadow(0 0 0 rgba(255,255,255,0));
+    /* LOGO WRAPPER – Startup, Arc, Pulse unchanged */
+.logo-wrap {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto 22px;
+  padding: 14px;
+  border-radius: 18px;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 80%);
+  animation:
+    logoStartup 3s ease-out forwards,
+    logoPulse 1.8s ease-in-out 3.3s infinite;
+}
 
-      /* 1) startup flicker, 2) then synced pulse with tech (1.8s like tech hunch) */
-      animation:
-        logoStartup 5s ease-out forwards,
-        logoPulse 2.1s ease-in-out 3.3s infinite;
-    }
+/* LOGO IMAGE – New Size, Bevel, Emboss, Stroke */
+.site-logo {
+  width: 560px;
+  max-width: 90%;
+  height: auto;
+  display: block;
 
-    /* Power arc sweep over the logo */
-    .logo-wrap::after {
-      content: "";
-      position: absolute;
-      top: -10%;
-      left: -40%;
-      width: 40%;
-      height: 120%;
-      background: linear-gradient(
-        120deg,
-        transparent 0%,
-        rgba(255,255,255,0.85) 50%,
-        transparent 100%
-      );
-      opacity: 0;
-      transform: translateX(-60%) skewX(-20deg);
-      pointer-events: none;
+  /* WHITE STROKE (4px) */
+  outline: 4px solid rgba(255,255,255,1);
+  outline-offset: -4px;
+  border-radius: 8px;
 
-      /* single sweep after startup begins */
-      animation: logoArcSweep 2.1s ease-out 2.9s 10 forwards;
-    }
+  /* BEVEL + EMBOSS EFFECT */
+  box-shadow:
+    /* inner highlights */
+    inset 2px 2px 4px rgba(255,255,255,0.55),
+    inset -2px -2px 6px rgba(0,0,0,0.45),
+
+    /* outer contour */
+    0 0 8px rgba(255,255,255,0.7),
+    0 6px 12px rgba(0,0,0,0.55);
+
+  /* glow from the startup/pulse animations */
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
+}
+
 
     .site-logo {
       max-width: 650px;
@@ -680,5 +682,6 @@
   </div>
 </body>
 </html>
+
 
 
