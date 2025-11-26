@@ -544,3 +544,139 @@
     }
 
     @keyframes techArmWork {
+      0% {
+        transform: rotate(-8deg);
+      }
+      100% {
+        transform: rotate(20deg);
+      }
+    }
+
+    @keyframes techKneeBend {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(-12deg);
+      }
+    }
+
+    /* Text content */
+    .message-main {
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+    }
+
+    .message-sub {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 18px;
+    }
+
+    .cta {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    .cta strong {
+      color: var(--accent-orange);
+    }
+
+    .contact-line {
+      margin-top: 6px;
+      font-size: 0.92rem;
+    }
+
+    .contact-line a {
+      color: var(--accent-orange);
+      text-decoration: none;
+    }
+
+    .contact-line a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .site-logo {
+        max-width: 280px;
+        width: 80%;
+      }
+      .subtitle {
+        font-size: 0.8rem;
+      }
+      .scene {
+        border-radius: 18px;
+      }
+      .message-main {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <div class="wrapper">
+    <!-- LOGO WITH STARTUP + ARC + PULSE -->
+    <div class="logo-wrap">
+      <img
+        src="logo-generatorsolutions.png"
+        alt="Generator Solutions Logo"
+        class="site-logo"
+      />
+    </div>
+
+    <div class="subtitle">
+      Scheduled Maintenance · Powering Confidence. Delivering Excellence.
+    </div>
+
+    <div class="scene" aria-hidden="true">
+      <div class="ground"></div>
+
+      <!-- Generator -->
+      <div class="generator">
+        <div class="gen-body">
+          <div class="gen-logo"></div>
+          <div class="gen-lid"></div>
+          <div class="gen-front-panel">
+            <div class="gen-vents"></div>
+          </div>
+          <div class="gen-interior"></div>
+        </div>
+      </div>
+
+      <!-- Technician + toolbox -->
+      <div class="tech-group">
+        <div class="toolbox"></div>
+        <div class="tech">
+          <div class="tech-head">
+            <div class="tech-hair"></div>
+          </div>
+          <div class="tech-body"></div>
+          <div class="tech-arm"></div>
+          <div class="tech-leg-left"></div>
+          <div class="tech-leg-right"></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="message-main">
+      Our website is currently <strong>undergoing a full tune-up.</strong>
+    </p>
+    <p class="message-sub">
+      Just like your generator, we’re performing scheduled maintenance to ensure
+      everything runs smoothly, efficiently, and reliably when you need it most.
+    </p>
+
+    <p class="cta">
+      Need assistance while we’re “under the hood”? <strong>We’re still here for you.</strong>
+    </p>
+    <p class="contact-line">
+      📞 (705) 286-1003 · 📧 <a href="mailto:kam@generatorsolutions.ca">kam@generatorsolutions.ca</a><br />
+      🌐 <a href="https://www.generatorsolutions.ca" target="_blank">www.generatorsolutions.ca</a>
+    </p>
+  </div>
+</body>
+</html>
